@@ -1,15 +1,16 @@
 module ShipStationRuby
   class Collection
 
-    attr_accessor :client, :resource
+    attr_accessor :client, :klass, :namespace
 
-    def initialize(client, resource)
+    def initialize(client, klass, namespace)
       @client = client
-      @resource = resource
+      @klass = klass
+      @namespace = namespace
     end
 
     def find(id)
-      @client.send("#{@resource}",id)
+      @client.send("#{@klass}",id)
       result = @client.execute
       single_result = result.first
       json_hash = JSON.parse(single_result.to_json)
@@ -18,7 +19,7 @@ module ShipStationRuby
     end
 
     def all
-      @client.send("#{@resource}")
+      @client.send("#{@klass}")
       results = @client.execute
       formatted_results = []
       results.each do |result|
@@ -34,8 +35,8 @@ module ShipStationRuby
       final_string_array = []
       filters.each do |attribute, value|
         shipstation_style_attribute = attribute.to_s.classify.gsub(/Id/, 'ID')
-        puts shipstation_style_attribute
-        puts value
+        # puts shipstation_style_attribute
+        # puts value
         if value.is_a?(Integer)
           filter_string = "#{shipstation_style_attribute} eq #{value}"
         else
@@ -45,8 +46,8 @@ module ShipStationRuby
         final_string_array << filter_string
       end
       final_string = final_string_array.join(' and ')
-      puts final_string
-      @client.send("#{@resource}").filter("#{final_string}")
+      # puts final_string
+      @client.send("#{@klass}").filter("#{final_string}")
       results = @client.execute
       formatted_results = []
       results.each do |result|
@@ -55,6 +56,24 @@ module ShipStationRuby
         formatted_results.push(result_rash)
       end
       return formatted_results
+    end
+
+    def create(attrs={})
+      klazz = "#{@namespace}::#{@klass.singularize}".constantize.new
+      attrs.each do |key, val|
+        klazz.send(key.to_s+"=", val)
+      end
+      @client.send("AddTo#{@klass}", klazz)
+      @client.send("save_changes")
+    end
+
+    def update(q={}, attrs={})
+      klazz = "#{@namespace}::#{@klass.singularize}".constantize.new
+      attrs.each do |key, val|
+        klazz.send(key.to_s+"=", val)
+      end
+      @client.send("update_object", klazz)
+      @client.send("save_changes")
     end
 
   end

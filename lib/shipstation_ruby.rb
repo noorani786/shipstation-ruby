@@ -5,7 +5,7 @@ require "shipstation_ruby/client"
 require "shipstation_ruby/collection"
 
 module ShipStationRuby
-  API_BASE = "https://data.shipstation.com/1.1"
+  # API_BASE = "https://data.shipstation.com/1.2"
 
   class ShipStationRubyError < StandardError
   end

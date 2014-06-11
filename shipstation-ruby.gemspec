@@ -4,11 +4,12 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |gem|
   gem.name          = "shipstation-ruby"
-  gem.version       = "0.0.1"
+  gem.version       = "0.0.2"
+  gem.licenses      = 'MIT'
   gem.authors       = ["Cody Duval"]
   gem.email         = ["cody.duval@gmail.com"]
   gem.description   = 'An API wrapper for the ShipStation API'
-  gem.summary       = 'An API wrapper for the ShipStation API'
+  gem.summary       = 'Ruby wrapper ShipStation API'
   gem.homepage      = 'https://github.com/codyduval/shipstation-ruby'
 
   gem.files         = `git ls-files`.split($/)
@@ -16,12 +17,12 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency 'rash'
-  gem.add_dependency 'ruby_odata'
-  gem.add_development_dependency 'minitest'
-  gem.add_development_dependency 'turn'
-  gem.add_development_dependency 'rake'
-  gem.add_development_dependency 'vcr'
-  gem.add_development_dependency 'webmock'
-  gem.add_development_dependency 'bundler'
+  gem.add_dependency 'rash', '0.4.0'
+  gem.add_dependency 'ruby_odata', '0.1.6'
+  gem.add_development_dependency 'minitest', '~> 0'
+  gem.add_development_dependency 'turn', '~> 0'
+  gem.add_development_dependency 'rake', '~> 0'
+  gem.add_development_dependency 'vcr', '~> 0'
+  gem.add_development_dependency 'webmock', '~> 0'
+  gem.add_development_dependency 'bundler', '~> 0'
 end

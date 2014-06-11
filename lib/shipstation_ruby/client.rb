@@ -1,22 +1,29 @@
 module ShipStationRuby
   class Client
-    attr_accessor :auth, :client
+    attr_accessor :auth, :client, :namespace
 
-    def initialize(username = ShipStationRuby.username, password = ShipStationRuby.password)
-      raise ArgumentError unless username && password
-      @auth = {:username => username, :password => password}
-
-      @client = OData::Service.new(API_BASE, @auth)
+    # require "shipstation_ruby"
+    # client = ShipStationRuby::Client.new(APICONFIG[:ship_station_api], APICONFIG[:ship_station_account], APICONFIG[:ship_station_password])
+    def initialize(api_host, username = ShipStationRuby.username, password = ShipStationRuby.password, namespace = "SS")
+      raise ArgumentError unless username && password && api_host
+      @auth = {:username => username, :password => password, :namespace => namespace}
+      @client = OData::Service.new(api_host, @auth)
+      @namespace = namespace
       self
     end
 
+    # client.orders.all
+    # client.ShippingProviders.all
+    # client.stores.all
+    # client.orders.create(OrderNumber: "Test0001")
+    # client.orders.update(OrderNumber: "Test0001")
     def method_missing(method, *args, &block)
       method = method.to_s
       options = args.last.is_a?(Hash) ? args.pop : {}
 
       # method == 'orders'
       klass = method.pluralize.camelize
-      ShipStationRuby::Collection.new(@client, klass)
+      ShipStationRuby::Collection.new(@client, klass, @namespace)
     end
 
     def inspect

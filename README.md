@@ -3,14 +3,22 @@ shipstation-ruby
 
 This is a Ruby wrapper for [ShipStation](http://www.shipstation.com/)'s [OData API](http://api.shipstation.com/MainPage.ashx).
 
-This is version 0.0.1 of the gem.  It currently only supports querying and filtering of ShipStation resources.
+[0.0.1](https://github.com/codyduval/shipstation-ruby)
+
+0.0.2 Features
+
+* Support spacename
+* Support api host
+* Collection Create
+* Collection Update
+* Collection Delete( set attr Active = false )
+* Collection Destroy( call `delete_object` )
 
 ## Installation
 
-ShipStation-Ruby is packaged as a Ruby gem. I recommend you install it with [Bundler](http://gembundler.com/) by adding the following line to your Gemfile:
-
 ``` ruby
-gem 'shipstation-ruby', '~> 0.0.1'
+gem 'shipstation-ruby', '~> 0.0.2'
+gem 'awesome_print', :require => 'ap'
 ```
 
 ## Rails Configuration
@@ -20,20 +28,22 @@ The ShipStation API uses basic HTTP authentication. Inside config/initializers, 
 ``` ruby
 ShipStationRuby.username  = ENV['SHIPSTATION_USERNAME']
 ShipStationRuby.password  = ENV['SHIPSTATION_PASSWORD']
+ShipStationRuby.api_host  = ENV['SHIPSTATION_API_HOST']
 ```
 
 ## Usage
 
 ### Set your credentials and create a new client:
 ``` ruby
-ShipStationRuby.username  = "shipstation_username"
+ShipStationRuby.api_host  = "https://data.shipstation.com/1.2"
+ShipStationRuby.password  = "shipstation_password"
 ShipStationRuby.password  = "shipstation_password"
 client = ShipStationRuby::Client.new
 ```
 
 ### Or create a new client by passing credentials directly:
 ``` ruby
-client = ShipStationRuby::Client.new("shipstation_username", "shipstation_password")
+client = ShipStationRuby::Client.new("https://data.shipstation.com/1.2", "username", "password")
 ```
 ### Query a resource by record id:
 ``` ruby
@@ -68,30 +78,32 @@ order.ship_city ## Boise
 order.order_total ## $343.32
 ```
 
+### Create order
+```ruby
+client = ShipStationRuby::Client.new
+client.order.create(OrderNumber: "T0001", OrderStatusID: 2)
+```
+
+### Update order
+```ruby
+client = ShipStationRuby::Client.new
+client.order.Update(1234, OrderNumber: "T0002", OrderStatusID: 2)
+```
+
+### List all stores
+```ruby
+client = ShipStationRuby::Client.new
+client.stores.all
+```
+
 ## Requirements
 This gem has been tested on Ruby 1.9.3 on version 1.1 of ShipStation's API.
+This gem has been tested on Ruby ruby-2.0.0-p247 on version 1.2 of ShipStation's API.
 
-## Bugs
-Please report bugs at https://github.com/codyduval/shipstation-ruby/issues
+## About This Gem
 
-## Note on Patches/Pull Requests
-* Fork the project from https://github.com/codyduval/shipstation-ruby/
-* Make your feature addition or bug fix.
-* Add tests
-* Commit
-* Send me a pull request. Bonus points for topic branches.
+I am Rique Li, I fork this from [shipstation-ruby](https://github.com/codyduval/shipstation-ruby/) and make some changes, But not test all the functions.When all changed tested, I will make a PR.
 
-## Thanks
-Thanks to [Nate Berkopec](https://github.com/nateberkopec) for advice and guidance.
+If You like this gem, Plz let me know.
 
-## License
 
-(The MIT License.)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

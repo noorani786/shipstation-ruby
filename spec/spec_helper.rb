@@ -12,15 +12,13 @@ Turn.config do |c|
 end
  
 VCR.configure do |c|
-  c.cassette_library_dir = 'spec/fixtures/shipstation_ruby_cassettes'
+  c.cassette_library_dir = 'spec/fixtures/cassettes'
   c.hook_into :webmock
 end
 
 #environment vars
 include ShipStationRuby
-ShipStationRuby.username = 'shipstation_username'
-ShipStationRuby.password = 'shipstation_password'
-
-ShipStationRuby.username != 'shipstation_username' or raise(
-        ConfigurationError, "ShipStationRuby username and password not configured"
-  )
+ShipStationRuby.username = 'kaka'
+ShipStationRuby.password = 'changchun'
+ShipStationRuby.api_host = 'https://data.shipstation.com/1.2'
+ShipStationRuby.store_id = '32199'

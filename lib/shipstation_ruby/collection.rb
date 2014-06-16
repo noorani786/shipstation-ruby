@@ -10,7 +10,7 @@ module ShipStationRuby
     end
 
     def find(id)
-      @client.send("#{@klass}",id)
+      @client.send("#{@klass}", id)
       result = @client.execute
       single_result = result.first
       json_hash = JSON.parse(single_result.to_json)
@@ -35,8 +35,6 @@ module ShipStationRuby
       final_string_array = []
       filters.each do |attribute, value|
         shipstation_style_attribute = attribute.to_s.classify.gsub(/Id/, 'ID')
-        # puts shipstation_style_attribute
-        # puts value
         if value.is_a?(Integer)
           filter_string = "#{shipstation_style_attribute} eq #{value}"
         else
@@ -46,7 +44,6 @@ module ShipStationRuby
         final_string_array << filter_string
       end
       final_string = final_string_array.join(' and ')
-      # puts final_string
       @client.send("#{@klass}").filter("#{final_string}")
       results = @client.execute
       formatted_results = []
@@ -58,6 +55,15 @@ module ShipStationRuby
       return formatted_results
     end
 
+    def first
+      all.first
+    end
+
+    def last
+      all.last
+    end
+
+    # client.order.create(OrderNumber: "HAHA1111")
     def create(attrs={})
       klazz = "#{@namespace}::#{@klass.singularize}".constantize.new
       attrs.each do |key, val|
@@ -67,12 +73,25 @@ module ShipStationRuby
       @client.send("save_changes")
     end
 
-    def update(q={}, attrs={})
-      klazz = "#{@namespace}::#{@klass.singularize}".constantize.new
+    # client.order.update(43478396, OrderNumber: "HAHA1111")
+    def update(id, attrs={})
+      @client.send("#{@klass}", id)
+      klazz = @client.execute.last
       attrs.each do |key, val|
-        klazz.send(key.to_s+"=", val)
+        klazz.send(key.to_s.classify+"=", val)
       end
       @client.send("update_object", klazz)
+      @client.send("save_changes")
+    end
+
+    def delete(id)
+      update(id, {active: false})
+    end
+
+    def destroy(id)
+      @client.send("#{@klass}", id)
+      klazz = @client.execute.last
+      @client.send("delete_object", klazz)
       @client.send("save_changes")
     end
 

@@ -46,9 +46,20 @@ describe "ShipStationRuby::Order metaclass" do
     end
   end
 
-  describe "Update order attributes" do
-    
+  describe "Create order" do
+    let(:client) { ShipStationRuby::Client.new }
+
+    it "should create order by attributes" do
+      VCR.use_cassette('create_order_with_attributes') do
+        order = client.order.create(OrderNumber: "Test001")
+        expect(order.order_number).to eq("Test001")
+      end
+    end
   end
+
+  describe "Update order"
+  describe "Delete order"
+  describe "Destroy order"
 
 
 end

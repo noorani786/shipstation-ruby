@@ -73,7 +73,7 @@ module ShipStationRuby
       @client.send("save_changes")
     end
 
-    # client.order.update(43478396, OrderNumber: "HAHA1111")
+    # client.orders.update(43478396, OrderNumber: "HAHA1111")
     def update(id, attrs={})
       @client.send("#{@klass}", id)
       klazz = @client.execute.last
@@ -84,10 +84,12 @@ module ShipStationRuby
       @client.send("save_changes")
     end
 
+    # client.orders.delete(123)
     def delete(id)
       update(id, {active: false})
     end
 
+    # client.orders.destory(123)
     def destroy(id)
       @client.send("#{@klass}", id)
       klazz = @client.execute.last

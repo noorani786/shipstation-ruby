@@ -5,11 +5,14 @@ This is a Ruby wrapper for [ShipStation](http://www.shipstation.com/)'s [OData A
 
 [0.0.1](https://github.com/codyduval/shipstation-ruby)
 
-0.0.2 Features
+## 0.0.2 Features
 
 * Support spacename
 * Support api host
 * Collection Create
+
+## 0.0.3 Features
+
 * Collection Update
 * Collection Delete( set attr Active = false )
 * Collection Destroy( call `delete_object` )
@@ -17,7 +20,7 @@ This is a Ruby wrapper for [ShipStation](http://www.shipstation.com/)'s [OData A
 ## Installation
 
 ``` ruby
-gem 'shipstation-ruby', '~> 0.0.2'
+gem 'shipstation-ruby', '~> 0.0.3'
 gem 'awesome_print', :require => 'ap'
 ```
 
@@ -90,10 +93,34 @@ client = ShipStationRuby::Client.new
 client.order.Update(1234, OrderNumber: "T0002", OrderStatusID: 2)
 ```
 
+### Delete order
+```ruby
+client = ShipStationRuby::Client.new
+client.orders.delete(1234)  #=> order.active = false
+```
+
+### Destory order
+```ruby
+client = ShipStationRuby::Client.new
+client.orders.destory(1234) # svc.delete_object(klass)
+```
+
 ### List all stores
 ```ruby
 client = ShipStationRuby::Client.new
 client.stores.all
+```
+
+### First of clollection
+```ruby
+client = ShipStationRuby::Client.new
+client.stores.first
+```
+
+### Last of clollection
+```ruby
+client = ShipStationRuby::Client.new
+client.stores.last
 ```
 
 ## Requirements

@@ -3,11 +3,12 @@ shipstation-ruby
 
 This is a Ruby wrapper for [ShipStation](http://www.shipstation.com/)'s [OData API](http://api.shipstation.com/MainPage.ashx).
 
-[0.0.1](https://github.com/codyduval/shipstation-ruby)
+## 0.0.1 Features
+[here](https://github.com/codyduval/shipstation-ruby)
 
 ## 0.0.2 Features
 
-* Support spacename
+* Support spacename, You can use it with rails model Order and SS::Order. `SS` is default namespace.
 * Support api host
 * Collection Create
 
@@ -17,10 +18,22 @@ This is a Ruby wrapper for [ShipStation](http://www.shipstation.com/)'s [OData A
 * Collection Delete( set attr Active = false )
 * Collection Destroy( call `delete_object` )
 
+## 0.0.4 Features
+
+* Collection First
+* Collection Last
+* Collection Count
+* Collection return Rash instance
+* Collection Create return a instance, not Array.
+* Collection Where by array
+* Collection Where by String. eg. `client.orders.where("CreateDate ge datetime'2014-06-17'")` 
+You can write a filter string, read more [here](http://msdn.microsoft.com/en-us/library/ff478141.aspx), [here](http://www.odata.org/documentation/odata-version-3-0/odata-version-3-0-core-protocol), and [here](http://docs.oasis-open.org/odata/odata/v4.0/os/part1-protocol/odata-v4.0-os-part1-protocol.html#_Built-in_Query_Functions)
+* Test with shipstation api 1.3
+
 ## Installation
 
 ``` ruby
-gem 'shipstation-ruby', '~> 0.0.3'
+gem 'shipstation-ruby', '~> 0.0.4'
 gem 'awesome_print', :require => 'ap'
 ```
 
@@ -34,11 +47,18 @@ ShipStationRuby.password  = ENV['SHIPSTATION_PASSWORD']
 ShipStationRuby.api_host  = ENV['SHIPSTATION_API_HOST']
 ```
 
+OR
+
+```ruby
+require "shipstation_ruby"
+client = ShipStationRuby::Client.new(APICONFIG[:ship_station_api], APICONFIG[:ship_station_account], APICONFIG[:ship_station_password])
+```
+
 ## Usage
 
 ### Set your credentials and create a new client:
 ``` ruby
-ShipStationRuby.api_host  = "https://data.shipstation.com/1.2"
+ShipStationRuby.api_host  = "https://data.shipstation.com/1.3"
 ShipStationRuby.password  = "shipstation_password"
 ShipStationRuby.password  = "shipstation_password"
 client = ShipStationRuby::Client.new
@@ -46,8 +66,9 @@ client = ShipStationRuby::Client.new
 
 ### Or create a new client by passing credentials directly:
 ``` ruby
-client = ShipStationRuby::Client.new("https://data.shipstation.com/1.2", "username", "password")
+client = ShipStationRuby::Client.new("https://data.shipstation.com/1.3", "username", "password")
 ```
+
 ### Query a resource by record id:
 ``` ruby
 order = client.order.find(12345)
@@ -124,13 +145,13 @@ client.stores.last
 ```
 
 ## Requirements
-This gem has been tested on Ruby 1.9.3 on version 1.1 of ShipStation's API.
-This gem has been tested on Ruby ruby-2.0.0-p247 on version 1.2 of ShipStation's API.
+This gem has been tested on Ruby 1.9.3 on version 1.1 of ShipStation's API.(by author)
+This gem has been tested on Ruby ruby-2.0.0-p247 on version 1.2 and 1.3 of ShipStation's API.(By Rique Li)
 
 ## About This Gem
 
-I am Rique Li, I fork this from [shipstation-ruby](https://github.com/codyduval/shipstation-ruby/) and make some changes, But not test all the functions.When all changed tested, I will make a PR.
+I am Rique Li, I fork this from [shipstation-ruby](https://github.com/codyduval/shipstation-ruby/) and make some changes, when all test done, I will make a PR.
 
-If You like this gem, Plz let me know.
+If You like this gem, write me. ^_^
 
 

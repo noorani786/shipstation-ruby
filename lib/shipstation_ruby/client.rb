@@ -9,15 +9,13 @@ module ShipStationRuby
       @auth = {:username => username, :password => password, :namespace => namespace}
       @client = OData::Service.new(api_host, @auth)
       @namespace = namespace
-      self
     end
 
     # client.orders.all
     # client.ShippingProviders.all
     # client.stores.all
-    # client.orders.create(OrderNumber: "Test0001")
-    # store = client.stores.all.map{|s| [s.StoreID, s.StoreName]}
-    # => [[29509, "Manual Orders"], [29510, "ShipStationTest"], [32199, "ShipStationTest2"]]
+    # client.orders.create(OrderNumber: "Test0001", OrderStatusID; 2)
+    # client.orders.where("CreateDate ge datetime'2014-06-17'")
     def method_missing(method, *args, &block)
       method = method.to_s
       options = args.last.is_a?(Hash) ? args.pop : {}

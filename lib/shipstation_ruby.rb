@@ -10,5 +10,6 @@ module ShipStationRuby
   class ShipStationRubyError < StandardError; end
   class AuthenticationError < ShipStationRubyError; end
   class ConfigurationError < ShipStationRubyError; end
+  class QueryError < ShipStationRubyError; end
 
 end

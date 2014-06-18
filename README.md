@@ -30,6 +30,11 @@ This is a Ruby wrapper for [ShipStation](http://www.shipstation.com/)'s [OData A
 You can write a filter string, read more [here](http://msdn.microsoft.com/en-us/library/ff478141.aspx), [here](http://www.odata.org/documentation/odata-version-3-0/odata-version-3-0-core-protocol), and [here](http://docs.oasis-open.org/odata/odata/v4.0/os/part1-protocol/odata-v4.0-os-part1-protocol.html#_Built-in_Query_Functions)
 * Test with shipstation api 1.3
 
+## 0.0.5 Features
+
+Rename the gem to shipstation-rb.
+
+
 ## Installation
 
 ``` ruby

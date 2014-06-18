@@ -1,4 +1,4 @@
-module ShipStationRuby
+module ShipStation
   class Collection
 
     attr_accessor :client, :klass, :namespace
@@ -36,7 +36,7 @@ module ShipStationRuby
           elsif val.is_a?(String)
             filter_string = "#{key} eq '#{val}'"
           else
-            raise ShipStationRuby::QueryError, "Query value incorrect."
+            raise ShipStation::QueryError, "Query value incorrect."
           end
           query_array << filter_string
         end
@@ -44,7 +44,7 @@ module ShipStationRuby
       elsif query.is_a?(String)
         query_string = query
       else
-        raise ShipStationRuby::QueryError, "Query incorrect."
+        raise ShipStation::QueryError, "Query incorrect."
       end
       @client.send("#{@klass}").filter("#{query_string}")
       results = @client.execute

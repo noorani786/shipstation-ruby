@@ -42,31 +42,31 @@ gem 'awesome_print', :require => 'ap'
 The ShipStation API uses basic HTTP authentication. Inside config/initializers, create a new configuration file and use the following template to pass in your ShipStation credentials:
 
 ``` ruby
-ShipStationRuby.username  = ENV['SHIPSTATION_USERNAME']
-ShipStationRuby.password  = ENV['SHIPSTATION_PASSWORD']
-ShipStationRuby.api_host  = ENV['SHIPSTATION_API_HOST']
+ShipStation.username  = ENV['SHIPSTATION_USERNAME']
+ShipStation.password  = ENV['SHIPSTATION_PASSWORD']
+ShipStation.api_host  = ENV['SHIPSTATION_API_HOST']
 ```
 
 OR
 
 ```ruby
 require "shipstation_ruby"
-client = ShipStationRuby::Client.new(APICONFIG[:ship_station_api], APICONFIG[:ship_station_account], APICONFIG[:ship_station_password])
+client = ShipStation::Client.new(APICONFIG[:ship_station_api], APICONFIG[:ship_station_account], APICONFIG[:ship_station_password])
 ```
 
 ## Usage
 
 ### Set your credentials and create a new client:
 ``` ruby
-ShipStationRuby.api_host  = "https://data.shipstation.com/1.3"
-ShipStationRuby.password  = "shipstation_password"
-ShipStationRuby.password  = "shipstation_password"
-client = ShipStationRuby::Client.new
+ShipStation.api_host  = "https://data.shipstation.com/1.3"
+ShipStation.password  = "shipstation_password"
+ShipStation.password  = "shipstation_password"
+client = ShipStation::Client.new
 ```
 
 ### Or create a new client by passing credentials directly:
 ``` ruby
-client = ShipStationRuby::Client.new("https://data.shipstation.com/1.3", "username", "password")
+client = ShipStation::Client.new("https://data.shipstation.com/1.3", "username", "password")
 ```
 
 ### Query a resource by record id:
@@ -94,7 +94,7 @@ etc.
 
 ### Once returned, resources can be queried by field name
 ``` ruby
-client = ShipStationRuby::Client.new
+client = ShipStation::Client.new
 order = client.order.find(12345)
 
 order.order_id ## 12345
@@ -104,43 +104,43 @@ order.order_total ## $343.32
 
 ### Create order
 ```ruby
-client = ShipStationRuby::Client.new
+client = ShipStation::Client.new
 client.order.create(OrderNumber: "T0001", OrderStatusID: 2)
 ```
 
 ### Update order
 ```ruby
-client = ShipStationRuby::Client.new
+client = ShipStation::Client.new
 client.order.Update(1234, OrderNumber: "T0002", OrderStatusID: 2)
 ```
 
 ### Delete order
 ```ruby
-client = ShipStationRuby::Client.new
+client = ShipStation::Client.new
 client.orders.delete(1234)  #=> order.active = false
 ```
 
 ### Destory order
 ```ruby
-client = ShipStationRuby::Client.new
+client = ShipStation::Client.new
 client.orders.destory(1234) # svc.delete_object(klass)
 ```
 
 ### List all stores
 ```ruby
-client = ShipStationRuby::Client.new
+client = ShipStation::Client.new
 client.stores.all
 ```
 
 ### First of clollection
 ```ruby
-client = ShipStationRuby::Client.new
+client = ShipStation::Client.new
 client.stores.first
 ```
 
 ### Last of clollection
 ```ruby
-client = ShipStationRuby::Client.new
+client = ShipStation::Client.new
 client.stores.last
 ```
 

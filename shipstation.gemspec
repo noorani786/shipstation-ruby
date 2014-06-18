@@ -1,17 +1,17 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "shipstation_ruby/version"
+require "shipstation/version"
 
 Gem::Specification.new do |gem|
-  gem.name          = "shipstation-ruby"
-  gem.version       = ShipStationRuby::VERSION
+  gem.name          = "shipstation-rb"
+  gem.version       = ShipStation::VERSION
   gem.licenses      = 'MIT'
-  gem.authors       = ["Cody Duval"]
-  gem.email         = ["cody.duval@gmail.com"]
-  gem.description   = 'An API wrapper for the ShipStation API'
+  gem.authors       = ["Rique Li"]
+  gem.email         = ["hi@liwei.me"]
+  gem.description   = 'An API wrapper for the ShipStation API.base on Cody Duval\'s 0.0.1'
   gem.summary       = 'Ruby wrapper ShipStation API'
-  gem.homepage      = 'https://github.com/codyduval/shipstation-ruby'
+  gem.homepage      = 'https://github.com/liwei78/shipstation-ruby'
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

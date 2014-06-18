@@ -1,9 +1,9 @@
-module ShipStationRuby
+module ShipStation
   class Client
     attr_accessor :auth, :client, :namespace
 
     # require "shipstation_ruby"
-    # client = ShipStationRuby::Client.new(APICONFIG[:ship_station_api], APICONFIG[:ship_station_account], APICONFIG[:ship_station_password])
+    # client = ShipStation::Client.new(APICONFIG[:ship_station_api], APICONFIG[:ship_station_account], APICONFIG[:ship_station_password])
     def initialize(api_host, username, password, namespace = "SS")
       raise ArgumentError unless username && password && api_host
       @auth = {:username => username, :password => password, :namespace => namespace}
@@ -20,11 +20,11 @@ module ShipStationRuby
       method = method.to_s
       options = args.last.is_a?(Hash) ? args.pop : {}
       klass = method.pluralize.camelize
-      ShipStationRuby::Collection.new(@client, klass, @namespace)
+      ShipStation::Collection.new(@client, klass, @namespace)
     end
 
     def inspect
-      "#<ShipStationRuby::Client:#{object_id}>"
+      "#<ShipStation::Client:#{object_id}>"
     end
 
   end

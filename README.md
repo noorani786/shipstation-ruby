@@ -33,7 +33,7 @@ You can write a filter string, read more [here](http://msdn.microsoft.com/en-us/
 ## Installation
 
 ``` ruby
-gem 'shipstation-ruby', '~> 0.0.4'
+gem 'shipstation-rb', '~> 0.0.4'
 gem 'awesome_print', :require => 'ap'
 ```
 

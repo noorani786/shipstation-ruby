@@ -38,7 +38,7 @@ Rename the gem to shipstation-rb.
 ## Installation
 
 ``` ruby
-gem 'shipstation-rb', '~> 0.0.4'
+gem 'shipstation-rb', '~> 0.0.5'
 gem 'awesome_print', :require => 'ap'
 ```
 

@@ -149,8 +149,43 @@ client = ShipStation::Client.new
 client.stores.last
 ```
 
+### Crate a Order
+
+```ruby
+client = ShipStation::Client.new
+client.order.create(
+        StoreID: APICONFIG[:ship_station_store_id],
+        OrderNumber: real_order.number,
+        ImportKey: "OrderID#{real_order.id}",
+        OrderDate: real_order.order_date,
+        PayDate: real_order.order_date,
+        OrderStatusID: 2,
+        RequestedShippingService: provider_name,
+        OrderTotal: real_order.total,
+        AmountPaid: real_order.payment_total,
+        ShippingAmount: real_order.adjustments.select{|aa| aa["label"] == "Shipping" }[0].try(:amount),
+        TaxAmount:      real_order.adjustments.select{|aa| aa["label"] == "sales_tax"}[0].try(:amount),
+        NotesFromBuyer: "Please make sure it gets here by Monday!",
+        InternalNotes: "Expedite this order.",
+        BuyerName: real_order.user.login,
+        BuyerEmail: real_order.user.email,
+        ShipName: "#{real_order.ship_address.firstname} #{real_order.ship_address.lastname}",
+        ShipCompany: "",
+        ShipStreet1: real_order.ship_address.address1,
+        ShipCity: real_order.ship_address.city,
+        ShipState: real_order.ship_address.state.name,
+        ShipPostalCode: real_order.ship_address.zipcode,
+        ShipCountryCode: real_order.ship_address.country.iso,
+        ShipPhone: real_order.ship_address.phone,
+        AddressVerified: 0,
+        MarketplaceID: 0,
+        InsuranceProvider: 0,
+        Confirmation: 0)
+```
+
 ## Requirements
 This gem has been tested on Ruby 1.9.3 on version 1.1 of ShipStation's API.(by author)
+
 This gem has been tested on Ruby ruby-2.0.0-p247 on version 1.2 and 1.3 of ShipStation's API.(By Rique Li)
 
 ## About This Gem

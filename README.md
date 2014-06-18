@@ -50,7 +50,7 @@ ShipStation.api_host  = ENV['SHIPSTATION_API_HOST']
 OR
 
 ```ruby
-require "shipstation_ruby"
+require "shipstation"
 client = ShipStation::Client.new(APICONFIG[:ship_station_api], APICONFIG[:ship_station_account], APICONFIG[:ship_station_password])
 ```
 

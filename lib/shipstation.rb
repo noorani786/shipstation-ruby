@@ -1,9 +1,9 @@
 require "rash"
 require "ruby_odata"
 
-require "shipstation_ruby/client"
-require "shipstation_ruby/collection"
-require "shipstation_ruby/version"
+require "shipstation/client"
+require "shipstation/collection"
+require "shipstation/version"
 
 module ShipStation
 

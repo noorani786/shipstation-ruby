@@ -18,12 +18,12 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency 'rash', '0.4.0'
-  gem.add_dependency 'ruby_odata', '0.1.6'
-  gem.add_development_dependency 'minitest', '~> 4.2'
-  gem.add_development_dependency 'turn', '~> 0.9'
-  gem.add_development_dependency 'rake', '~> 10.3'
-  gem.add_development_dependency 'vcr', '~> 2.9'
-  gem.add_development_dependency 'webmock', '~> 1.18'
-  gem.add_development_dependency 'bundler', '1.3.5'
+  gem.add_dependency 'rash'
+  gem.add_dependency 'ruby_odata'
+  gem.add_development_dependency 'minitest'
+  gem.add_development_dependency 'turn'
+  gem.add_development_dependency 'rake'
+  gem.add_development_dependency 'vcr'
+  gem.add_development_dependency 'webmock'
+  gem.add_development_dependency 'bundler'
 end
